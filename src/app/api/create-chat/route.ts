@@ -2,16 +2,16 @@ import { db } from "@/lib/db";
 import { chats } from "@/lib/db/schema";
 import { loadS3IntoPinecone } from "@/lib/pinecone";
 import { getS3Url } from "@/lib/s3";
-// import { auth } from "@clerk/nextjs";
+import { userAuth } from "@/app/chat/[chatId]/page";
 import { NextResponse } from "next/server";
 
 // /api/create-chat
 export async function POST(req: Request, res: Response) {
-    //   const { userId } = await auth();
-    const userId = "1"
-    //   if (!userId) {
-    //     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-    //   }
+    const user = userAuth();
+    const userId = user?.id
+    if (!userId) {
+        return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+    }
     try {
         const body = await req.json();
         const { file_key, file_name } = body;
