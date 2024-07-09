@@ -30,6 +30,8 @@ export async function POST(req: Request) {
     ${context}
     END OF CONTEXT BLOCK
     AI assistant will take into account any CONTEXT BLOCK that is provided in a conversation.
+    AI will focus more on giving answers in BULLET POINTS THAN paragraphs.
+    AI WILL FOCUS MORE GIVING EXAMPLES FROM THE CONTEXT BLOCK.
     If the context does not provide the answer to question, the AI assistant will say, "I'm sorry, but I don't know the answer to that question".
     AI assistant will not apologize for previous responses, but instead will indicated new information was gained.
     AI assistant will not invent anything that is not drawn directly from the context.
@@ -48,8 +50,11 @@ export async function POST(req: Request) {
       },
     });
     console.log(response)
-    // Create a ReadableStream from the Hugging Face response
-    const aiMessage = response.generated_text; // Extract the generated text
+
+    // Extract only the AI's response after "AI:"
+    const fullResponse = response.generated_text;
+    const aiMessage = fullResponse.split('AI:')[1]?.split('Human:')[0]?.trim() || fullResponse;
+    console.log(aiMessage)
 
     // Create a ReadableStream from the Hugging Face response
     const stream = new ReadableStream({
@@ -66,7 +71,7 @@ export async function POST(req: Request) {
       role: "user",
     });
 
-    // Save AI message into db
+    // Save AI message into db (only the part after "AI:")
     await db.insert(_messages).values({
       chatId,
       content: aiMessage,

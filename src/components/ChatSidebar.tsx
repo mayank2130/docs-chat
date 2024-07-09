@@ -18,7 +18,7 @@ const ChatSideBar = ({ chats, chatId, isPro }: Props) => {
   const [loading, setLoading] = React.useState(false);
 
   return (
-    <div className="max-h-screen soff p-4 text-gray-200 bg-gray-900">
+    <div className="max-h-screen slide-out-to-left-full w-60 p-4 text-gray-200 bg-gray-900">
       <Link href="/">
         <Button className="w-full border-dashed border-white border">
           <PlusCircle className="mr-2 w-4 h-4" />

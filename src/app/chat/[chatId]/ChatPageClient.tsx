@@ -1,5 +1,5 @@
 // app/chat/[chatId]/ChatPageClient.tsx
-"use client"
+"use client";
 import React from "react";
 import ChatComponent from "@/components/ChatComponent";
 import ChatSideBar from "@/components/ChatSidebar";
@@ -14,10 +14,10 @@ type Props = {
 
 const ChatPageClient = ({ chats, currentChat, chatId, isPro }: Props) => {
   return (
-    <div className="flex h-screen ">
+    <div className="flex h-screen">
       <div className="flex w-full h-screen ">
         {/* chat sidebar */}
-        <ChatSideBar chats={chats} chatId={chatId} isPro={isPro} />
+          <ChatSideBar chats={chats} chatId={chatId} isPro={isPro} />
         {/* pdf viewer */}
         <div className="max-h-screen p-4 flex-[5]">
           <PDFViewer pdf_url={currentChat?.pdfUrl || ""} />
