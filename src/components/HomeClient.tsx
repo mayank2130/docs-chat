@@ -5,15 +5,18 @@ import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { ArrowRight, LogIn } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
+import SubscriptionButton from "./SubscriptionButton";
 
-export default function HomeClient({ 
-  isAuth, 
-  userId, 
-  firstChat 
-}: { 
-  isAuth: boolean; 
-  userId: string | null; 
-  firstChat: any; 
+export default function HomeClient({
+  isAuth,
+  userId,
+  firstChat,
+  isPro,
+}: {
+  isAuth: boolean;
+  userId: string | null;
+  firstChat: any;
+  isPro: boolean;
 }) {
   return (
     <div className="w-screen min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
@@ -33,15 +36,15 @@ export default function HomeClient({
                   </Button>
                 </Link>
                 <div className="ml-3">
-                  {/* <SubscriptionButton isPro={isPro} /> */}
+                  <SubscriptionButton isPro={isPro} />
                 </div>
               </>
             )}
           </div>
 
           <p className="max-w-xl mt-1 text-lg text-slate-600">
-            Join millions of students, researchers and professionals to instantly
-            answer questions and understand research with AI
+            Join millions of students, researchers and professionals to
+            instantly answer questions and understand research with AI
           </p>
 
           <div className="w-full mt-4">
